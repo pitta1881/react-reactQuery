@@ -3,7 +3,7 @@ import { sleep } from '../../helpers/sleep';
 import { GithubLabel } from '../interfaces';
 
 export const getLabels = async (): Promise<GithubLabel[]> => {
-  await sleep(2000);
+  await sleep(1000);
   const { data } = await githubApi.get<GithubLabel[]>('/labels');
   return data;
 };
