@@ -58,6 +58,17 @@ export const IssueItem = ({ issue }: Props) => {
           )}{' '}
           days ago by <span className="font-bold">{issue.user.login}</span>
         </span>
+        <div className="flex flex-wrap">
+          {issue.labels.map(label => (
+            <span
+              key={label.id}
+              className="px-2 py-1 rounded-full text-xs font-semibold"
+              style={{ border: `1px solid #${label.color}` }}
+            >
+              {label.name}
+            </span>
+          ))}
+        </div>
       </div>
 
       <img
