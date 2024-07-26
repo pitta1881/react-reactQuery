@@ -1,5 +1,5 @@
 import { githubApi } from '../../api/github.api';
-import { sleep } from '../../helpers/sleep';
+import { sleep } from '../../helpers';
 import { GithubIssues, State } from '../interfaces';
 
 export const getIssues = async (

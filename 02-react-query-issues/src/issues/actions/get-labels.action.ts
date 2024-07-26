@@ -1,5 +1,5 @@
 import { githubApi } from '../../api/github.api';
-import { sleep } from '../../helpers/sleep';
+import { sleep } from '../../helpers';
 import { GithubLabel } from '../interfaces';
 
 export const getLabels = async (): Promise<GithubLabel[]> => {

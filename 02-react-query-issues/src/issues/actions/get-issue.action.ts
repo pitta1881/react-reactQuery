@@ -1,5 +1,5 @@
 import { githubApi } from '../../api/github.api';
-import { sleep } from '../../helpers/sleep';
+import { sleep } from '../../helpers';
 import { GithubIssues } from '../interfaces';
 
 export const getIssue = async (issueNumber: number): Promise<GithubIssues> => {
