@@ -2,17 +2,17 @@ import { useState } from 'react';
 import { LoadingSpinner } from '../../share/components';
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
-import { useIssues } from '../hooks';
+import { useIssuesInfinite } from '../hooks';
 import { State } from '../interfaces';
 
-export const ListView = () => {
+export const ListViewInfinite = () => {
   const [state, setState] = useState<State>(State.All);
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
-  const { issuesQuery, currentPage, nextPage, prevPage } = useIssues({
+  const { issuesQuery } = useIssuesInfinite({
     state,
     selectedLabels,
   });
-  const issues = issuesQuery.data ?? [];
+  const issues = issuesQuery.data?.pages.flat() ?? [];
 
   const onLabelSelected = (label: string) => {
     if (selectedLabels.includes(label)) {
@@ -28,24 +28,15 @@ export const ListView = () => {
         {issuesQuery.isLoading ? (
           <LoadingSpinner />
         ) : (
-          <>
+          <div className="flex flex-col justify-center">
             <IssueList issues={issues} onStateChange={setState} state={state} />
-            <div className="flex justify-between items-center">
-              <button
-                className="p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all"
-                onClick={prevPage}
-              >
-                Anteriores
-              </button>
-              <span>{currentPage}</span>
-              <button
-                className="p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all"
-                onClick={nextPage}
-              >
-                Siguientes
-              </button>
-            </div>
-          </>
+            <button
+              onClick={() => issuesQuery.fetchNextPage()}
+              className="p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all disabled:bg-gray-500"
+            >
+              {issuesQuery.isFetchingNextPage ? 'Loading more...' : 'Load more'}
+            </button>
+          </div>
         )}
       </div>
 
