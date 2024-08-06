@@ -2,6 +2,7 @@ export * from "./api/productsApi";
 export * from "./components/ProductCard";
 export * from "./components/ProductList";
 export * from "./hooks/useProduct";
+export * from "./hooks/useProductMutation";
 export * from "./hooks/useProductPrefetch";
 export * from "./hooks/useProducts";
 export * from "./interfaces/product.interface";
